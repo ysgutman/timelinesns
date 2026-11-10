@@ -12,9 +12,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" crossorigin href="./assets/index-5yogKnyf.css">
   </head>
   <body class="bg-slate-50 text-slate-900 antialiased selection:bg-sky-100 selection:text-sky-900">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="module">
+      // GitHub Pages static fallback loader: loads compiled bundle if /src/main.tsx fails
+      if (!window.__VITE_LOADED__) {
+        window.__VITE_LOADED__ = false;
+        setTimeout(() => {
+          const root = document.getElementById('root');
+          if (root && root.children.length === 0) {
+            console.log('GitHub Pages mode: Loading precompiled bundle...');
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.crossOrigin = 'anonymous';
+            script.src = './assets/index-Dy2DbIK6.js';
+            document.body.appendChild(script);
+          }
+        }, 80);
+      }
+    </script>
   </body>
 </html>
