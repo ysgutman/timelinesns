@@ -11,12 +11,14 @@ export function getClientId(): string {
   return clientId;
 }
 
+const API_BASE = import.meta.env.VITE_API_URL || '';
+
 export async function fetchPosts(page: number = 1, limit: number = 10): Promise<{
   posts: Post[];
   pagination: PaginationData;
 }> {
   const clientId = getClientId();
-  const res = await fetch(`/api/posts?page=${page}&limit=${limit}&clientId=${encodeURIComponent(clientId)}`);
+  const res = await fetch(`${API_BASE}/api/posts?page=${page}&limit=${limit}&clientId=${encodeURIComponent(clientId)}`);
   if (!res.ok) {
     const errorData = await res.json().catch(() => ({}));
     throw new Error(errorData.error || '글 목록을 불러오지 못했습니다.');
@@ -30,7 +32,7 @@ export async function createPostApi(payload: {
   password: string;
   category?: string;
 }): Promise<Post> {
-  const res = await fetch('/api/posts', {
+  const res = await fetch(`${API_BASE}/api/posts`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -43,7 +45,7 @@ export async function createPostApi(payload: {
 }
 
 export async function verifyPasswordApi(postId: number, password: string): Promise<boolean> {
-  const res = await fetch(`/api/posts/${postId}/verify`, {
+  const res = await fetch(`${API_BASE}/api/posts/${postId}/verify`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ password }),
@@ -64,7 +66,7 @@ export async function updatePostApi(
     category?: string;
   }
 ): Promise<Post> {
-  const res = await fetch(`/api/posts/${postId}`, {
+  const res = await fetch(`${API_BASE}/api/posts/${postId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
@@ -77,7 +79,7 @@ export async function updatePostApi(
 }
 
 export async function deletePostApi(postId: number, password: string): Promise<void> {
-  const res = await fetch(`/api/posts/${postId}`, {
+  const res = await fetch(`${API_BASE}/api/posts/${postId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ password }),
@@ -94,7 +96,7 @@ export async function toggleLikeApi(postId: number): Promise<{
   isLiked: boolean;
 }> {
   const clientId = getClientId();
-  const res = await fetch(`/api/posts/${postId}/like`, {
+  const res = await fetch(`${API_BASE}/api/posts/${postId}/like`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ clientId }),
