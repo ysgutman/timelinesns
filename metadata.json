@@ -1,0 +1,8 @@
+{
+  "name": "글쓰기 타임라인 SNS",
+  "description": "우리 반 학생들의 다채로운 글과 생각을 공유하는 타임라인 SNS 플랫폼입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
